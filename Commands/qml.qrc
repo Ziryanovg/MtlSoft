@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>commands.bmp</file>
+        <file>AddCommandDialog.qml</file>
+        <file>ModelDelegate.qml</file>
+    </qresource>
+</RCC>

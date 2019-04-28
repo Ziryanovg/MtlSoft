@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QXmlStreamReader>
+#include <QStandardPaths>
 
 CommandsModel::CommandsModel(QObject *parent) : QAbstractListModel(parent)
 {
@@ -56,7 +57,9 @@ void CommandsModel::add(QString command)
 
 void CommandsModel::ReadCommandsFromXml()
 {
-    QFile file("D:/1.xml");
+    QString path = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).first();
+    path+="/1.xml";
+    QFile file(path);
     if(!file.open(QFile::ReadOnly | QFile::Text)){
         qDebug() << "Cannot read file" << file.errorString();
         return;
@@ -84,7 +87,9 @@ void CommandsModel::ReadCommandsFromXml()
 
 void CommandsModel::WriteCommandsToXml()
 {
-    QFile file("D:/1.xml");
+    QString path = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).first();
+    path+="/1.xml";
+    QFile file(path);
     if(file.exists())
         file.remove();
 

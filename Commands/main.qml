@@ -10,57 +10,44 @@ Window {
     height: 300
     title: qsTr("Hello World")
 
-    AddCommandDialog
-    {
-        id:addDialog
-        onDialogAccepted: Model.add(commandName)
-    }
 
-    ModelDelegate
-    {
-        id:delegate
-    }
 
-    Button{
-        id: btn
-        text: "Добавить"
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        onClicked:
-        {
-            addDialog.open();
+
+    SwipeView
+    {
+        id:swipeView
+        anchors.fill: parent
+        currentIndex: 0
+        interactive: false
+
+        Item {
+            id: mainPage
+
+            MainPage{
+                id:mainPageComp
+                anchors.fill: parent
+                onAddBtnClicked: swipeView.currentIndex = 1
+            }
         }
+
+        Item {
+            id: addCommandView
+
+            AddCommandPage
+            {
+                id:addCommandComp
+                anchors.fill: parent
+                onAddBtnClicked:
+                {
+                    onCancelBtnClicked: swipeView.currentIndex = 0
+                    mainPageComp.addNewCommand(commandName)
+                }
+
+                onCancelBtnClicked: swipeView.currentIndex = 0
+            }
+
+        }
+
     }
 
-    Rectangle
-    {
-        id: rectborder
-        height: 2
-        color: "black"
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.top: btn.bottom
-        anchors.topMargin: 0
-    }
-
-    ListView
-    {
-        id:listview
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.top: rectborder.bottom
-        anchors.topMargin: 0
-        model:Model
-        delegate: delegate
-    }
 }

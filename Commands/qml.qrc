@@ -2,7 +2,8 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>commands.bmp</file>
-        <file>AddCommandDialog.qml</file>
+        <file>AddCommandPage.qml</file>
         <file>ModelDelegate.qml</file>
+        <file>MainPage.qml</file>
     </qresource>
 </RCC>
